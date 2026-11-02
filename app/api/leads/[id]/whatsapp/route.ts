@@ -1,0 +1,6 @@
+import { and, eq } from "drizzle-orm";
+import { NextResponse } from "next/server";
+import { getDb } from "@/db";
+import { leads, outreachEvents, profiles } from "@/db/schema";
+import { getChatGPTUser } from "@/app/chatgpt-auth";
+export async function GET(_:Request,context:{params:Promise<{id:string}>}){const user=await getChatGPTUser();if(!user)return new NextResponse("Sign in required",{status:401});const db=getDb();const profile=await db.query.profiles.findFirst({where:eq(profiles.id,user.userId)});if(!profile)return new NextResponse("Member profile required",{status:403});const {id}=await context.params;const lead=await db.query.leads.findFirst({where:profile.role==="admin"?eq(leads.id,id):and(eq(leads.id,id),eq(leads.ownerId,profile.id))});if(!lead)return new NextResponse("Lead not found",{status:404});await db.insert(outreachEvents).values({id:crypto.randomUUID(),leadId:lead.id,actorId:profile.id,channel:"whatsapp",createdAt:new Date().toISOString()});const message=encodeURIComponent(`Hello ${lead.name}, it was great meeting you. I’m following up from Winsire Office about the opportunity we discussed.`);return NextResponse.redirect(`https://wa.me/${lead.normalizedPhone}?text=${message}`)}
