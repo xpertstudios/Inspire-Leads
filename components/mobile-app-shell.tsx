@@ -1,17 +1,18 @@
 "use client";
 
 import { BarChart3, Download, Home, PlusCircle, Users } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type InstallPromptEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
 
 export function MobileAppShell() {
   const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null);
-  const [hasDashboard, setHasDashboard] = useState(false);
+  const pathname = usePathname();
+  const hasDashboard = pathname === "/";
 
   useEffect(() => {
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js");
-    setHasDashboard(Boolean(document.getElementById("overview")));
     const capture = (event: Event) => { event.preventDefault(); setInstallPrompt(event as InstallPromptEvent); };
     window.addEventListener("beforeinstallprompt", capture);
     return () => window.removeEventListener("beforeinstallprompt", capture);
