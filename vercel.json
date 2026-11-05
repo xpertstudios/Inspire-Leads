@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": "vercel-static",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://inspire-leads-winsire.decentpeace1.chatgpt.site/:path*",
+      "permanent": false
+    }
+  ]
+}
