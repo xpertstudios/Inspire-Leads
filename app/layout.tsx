@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Private daily lead capture and outreach tracking for WINSPIRE OFFICE.",
   manifest: "/manifest.webmanifest",
   applicationName: "Inspire Leads",
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Inspire" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "INSPIRE Leads" },
   formatDetection: { telephone: false },
   icons: {
     icon: "/favicon.svg",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#173f31",
+  themeColor: "#081b3a",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
