@@ -21,4 +21,13 @@ export async function signup(formData: FormData) {
   redirect("/login?message=Check your email to confirm your account.");
 }
 
+export async function resendConfirmation(formData: FormData) {
+  const supabase = await createClient();
+  const email = String(formData.get("email") || "").trim();
+  if (!email) redirect("/login?error=Enter+your+email+address+first.");
+  const { error } = await supabase.auth.resend({ type: "signup", email, options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm?next=/` } });
+  if (error) redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  redirect("/login?message=A+new+confirmation+email+has+been+sent.");
+}
+
 export async function signout() { const supabase = await createClient(); await supabase.auth.signOut(); redirect("/login"); }
