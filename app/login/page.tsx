@@ -24,7 +24,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         <button formAction={signingUp ? signup : login} className="min-h-12 w-full rounded-xl bg-[#2586e8] px-3 font-semibold text-white">{signingUp ? "Create account and email confirmation" : "Sign in"}</button>
         {signingUp ? <button formAction={resendConfirmation} formNoValidate className="min-h-10 w-full text-sm font-medium text-[#77bbff] underline decoration-[#77bbff]/40 underline-offset-4">Resend confirmation email</button> : null}
       </form>
-      <p className="mt-5 text-xs leading-relaxed text-[#91a9c5]">{signingUp ? "You must confirm your email before you can sign in." : "New here? Select Create account above."}</p>
+      <p className="mt-5 text-xs leading-relaxed text-[#91a9c5]">{signingUp ? "Confirm your email before signing in. Request a resend only once; repeated requests can pause email delivery for one hour." : "New here? Select Create account above. Already confirmed? Sign in without requesting another email."}</p>
     </section>
   </main>;
 }
