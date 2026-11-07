@@ -40,11 +40,12 @@ export function InspireShell({ children, isAdmin, displayName }: { children: Rea
     </aside>
     {open ? <button type="button" aria-label="Close menu" className="fixed inset-0 z-30 bg-[#06142a]/60 lg:hidden" onClick={() => setOpen(false)}/> : null}
     <div className="lg:pl-72">
-      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-[#dbe5f1] bg-white/95 px-4 backdrop-blur sm:px-7">
+      <header className="fixed inset-x-0 top-0 z-20 flex h-16 items-center justify-between border-b border-[#dbe5f1] bg-white/95 px-4 backdrop-blur sm:px-7 lg:left-72">
         <button type="button" aria-label="Open menu" onClick={() => setOpen(true)} className="grid h-10 w-10 place-items-center rounded-xl border border-[#dbe5f1] lg:hidden"><Menu/></button>
         <div className="hidden lg:block"><p className="text-sm font-semibold">WINSPIRE OFFICE</p><p className="text-xs text-[#6f7f96]">Africa/Lagos · closes 12:00 AM WAT</p></div>
         <div className="ml-auto flex items-center gap-2"><Link href="/follow-ups" aria-label="Open follow-ups" className="grid h-10 w-10 place-items-center rounded-xl border border-[#dbe5f1] text-[#63758e] hover:bg-[#eef5fc]"><Bell size={18}/></Link><span className="grid h-10 w-10 place-items-center rounded-full bg-[#dcecff] font-semibold text-[#1558a5]">{displayName[0]?.toUpperCase()}</span></div>
       </header>
+      <div aria-hidden="true" className="h-16"/>
       <main className="mx-auto max-w-7xl px-4 py-6 pb-24 sm:px-7 sm:py-8 lg:pb-10">{children}</main>
     </div>
     <nav className="mobile-tabbar fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-[#dbe5f1] bg-white px-2 pt-2 lg:hidden">
